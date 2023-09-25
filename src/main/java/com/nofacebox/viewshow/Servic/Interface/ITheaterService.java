@@ -11,7 +11,7 @@ import java.util.Set;
 
 public interface ITheaterService {
 
-    public Theater getTheater(Long id);
+    public Theater getTheaterById(Long id);
 
     public Theater saveTheater(Theater saveItem);
 
@@ -20,5 +20,5 @@ public interface ITheaterService {
     public ResponseVo deleteTheater(Long id);
 
 //    public List<Map<String, Object>>getTheaterByRegion(String region);
-    public List<Theater> getTheater(Set<String> ss);
+    public List<Theater> getAllTheaters();
 }

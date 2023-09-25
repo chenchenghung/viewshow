@@ -15,8 +15,8 @@ public class Theater {
     @Column (name="name")
     private  String name;
 
-    @OneToMany(mappedBy = "theater", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Link> theaterMovieAdateLink;
+//    @OneToMany(mappedBy = "theater", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private Set<Link> theaterMovieAdateLink;
     public  Theater(){};
 
     public Theater (long tid , String region, String name){

@@ -17,7 +17,7 @@ public class TheaterService implements ITheaterService {
     @Autowired
     private TheaterRepositary theaterRepositary;
     @Override
-    public Theater getTheater(Long id) {
+    public Theater getTheaterById(Long id) {
         return theaterRepositary.findById(id).orElse(null) ;
     }
 
@@ -45,7 +45,7 @@ public class TheaterService implements ITheaterService {
 
 
     @Override
-    public List<Theater> getTheater(Set<String> ss) {
-        return null;
+    public List<Theater> getAllTheaters() {
+        return theaterRepositary.findAll();
     }
 }
