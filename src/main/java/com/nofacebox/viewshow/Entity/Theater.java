@@ -25,11 +25,11 @@ public class Theater {
         this.name=name;
     }
 
-    public long getTid() {
+    public Long getTid() {
         return tid;
     }
 
-    public void setTid(long tid) {
+    public void setTid(Long tid) {
         this.tid = tid;
     }
 

@@ -15,7 +15,7 @@ public interface ITheaterService {
 
     public Theater saveTheater(Theater saveItem);
 
-    public Theater modifyTheater(Theater modify);
+    public Theater modifyTheater(Theater modify) throws Exception;
 
     public ResponseVo deleteTheater(Long id);
 

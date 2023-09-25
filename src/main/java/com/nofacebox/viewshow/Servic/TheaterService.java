@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 @Service
 public class TheaterService implements ITheaterService {
@@ -27,8 +28,12 @@ public class TheaterService implements ITheaterService {
     }
 
     @Override
-    public Theater modifyTheater(Theater modify) {
-        return theaterRepositary.save(modify);
+    public Theater modifyTheater(Theater modify) throws Exception {
+        Theater t = theaterRepositary.findById(modify.getTid()).orElseThrow(()->new Exception("not exist"));
+        t.setRegion(modify.getRegion());
+        t.setName(modify.getName());
+
+        return theaterRepositary.save(t);
     }
 
     @Override

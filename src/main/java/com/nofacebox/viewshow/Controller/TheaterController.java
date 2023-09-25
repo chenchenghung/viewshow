@@ -1,6 +1,7 @@
 package com.nofacebox.viewshow.Controller;
 
 import com.nofacebox.viewshow.Entity.Theater;
+import com.nofacebox.viewshow.Model.ResponseVo;
 import com.nofacebox.viewshow.Servic.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +22,24 @@ public class TheaterController {
     public ResponseEntity getAllTheaters(){
         return ResponseEntity.ok(theaterService.getAllTheaters());
     }
-    @PostMapping
+
+    @PostMapping( produces = "application/json")
     public ResponseEntity save(@RequestBody Theater saveItem){
         Assert.notNull(saveItem,"This entity can not be null");
-        Assert.isNull(theaterService.getTheaterById(saveItem.getTid()),"ready to insert");
+//        Assert.isNull(theaterService.getTheaterById(saveItem.getTid()),"ready to insert");
         return ResponseEntity.ok(theaterService.saveTheater(saveItem));
     }
+    @PutMapping( produces = "application/json")
+    public ResponseEntity modify(@RequestBody Theater modify) throws Exception {
+        Assert.notNull(modify,"This entity can not be null");
+//        Assert.notNull(theaterService.getTheaterById(modify.getTid()),"ready to modify");
+        return ResponseEntity.ok(theaterService.modifyTheater(modify));
+    }
+    @DeleteMapping("/{tid}")
+    public ResponseEntity delete(@PathVariable long tid){
+        return ResponseEntity.ok(theaterService.deleteTheater(tid));
+    }
+
 
     
 }
