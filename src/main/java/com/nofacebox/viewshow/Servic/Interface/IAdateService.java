@@ -14,6 +14,6 @@ public interface IAdateService {
 
     public ResponseVo deleteAdate(long id);
 
-    public long findAidbyDate(Date date);
+    public Long findAidbyDate(Date date) throws Exception;
 
 }

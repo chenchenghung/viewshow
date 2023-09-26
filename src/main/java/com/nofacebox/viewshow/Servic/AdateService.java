@@ -4,10 +4,13 @@ import com.nofacebox.viewshow.Entity.Adate;
 import com.nofacebox.viewshow.Model.ResponseVo;
 import com.nofacebox.viewshow.Repository.AdateRepositary;
 import com.nofacebox.viewshow.Servic.Interface.IAdateService;
+import com.nofacebox.viewshow.Utils.NativeQueryConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdateService implements IAdateService {
@@ -41,7 +44,9 @@ public class AdateService implements IAdateService {
     }
 
     @Override
-    public long findAidbyDate(Date date) {
-        return 0;
+    public Long findAidbyDate(Date date) throws Exception {
+        Map<String, Object> a = adateRepositary.getAidByXdate(new java.sql.Date(date.getTime())).orElseThrow(() -> new Exception("not found"));
+        Long aid = Long.valueOf( a.get("aid").toString());
+        return aid;
     }
 }
