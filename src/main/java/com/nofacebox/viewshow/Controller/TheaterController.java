@@ -8,35 +8,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/theater")
+@RequestMapping("/api/v1")
 public class TheaterController {
     @Autowired
     TheaterService theaterService;
 
-    @GetMapping("/{tid}")
-    public ResponseEntity getTheater(@PathVariable long tid){
+    @GetMapping("/theater/{tid}")
+    public ResponseEntity<Theater> getTheater(@PathVariable long tid){
          return ResponseEntity.ok(theaterService.getTheaterById(tid));
     }
-    @GetMapping("/all")
-    public ResponseEntity getAllTheaters(){
+    @GetMapping("/theaters")
+    public ResponseEntity<List<Theater>> getAllTheaters(){
         return ResponseEntity.ok(theaterService.getAllTheaters());
     }
 
-    @PostMapping( produces = "application/json")
-    public ResponseEntity save(@RequestBody Theater saveItem){
+    @PostMapping( value="/theater",produces = "application/json")
+    public ResponseEntity<Theater> save(@RequestBody Theater saveItem){
         Assert.notNull(saveItem,"This entity can not be null");
-//        Assert.isNull(theaterService.getTheaterById(saveItem.getTid()),"ready to insert");
         return ResponseEntity.ok(theaterService.saveTheater(saveItem));
     }
-    @PutMapping( produces = "application/json")
-    public ResponseEntity modify(@RequestBody Theater modify) throws Exception {
+    @PutMapping( value="/theater",produces = "application/json")
+    public ResponseEntity<Theater> modify(@RequestBody Theater modify) throws Exception {
         Assert.notNull(modify,"This entity can not be null");
-//        Assert.notNull(theaterService.getTheaterById(modify.getTid()),"ready to modify");
         return ResponseEntity.ok(theaterService.modifyTheater(modify));
     }
-    @DeleteMapping("/{tid}")
-    public ResponseEntity delete(@PathVariable long tid){
+    @DeleteMapping("/theater/{tid}")
+    public ResponseEntity<ResponseVo> delete(@PathVariable long tid){
         return ResponseEntity.ok(theaterService.deleteTheater(tid));
     }
 
