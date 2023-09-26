@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Set;
 
 public interface IMovieService {
-    public Movie getMovie(long id);
+    public Movie getMovie(Long id);
 
     public Movie saveMovie(Movie saveItem);
 
-    public Movie modifyMovie(Movie modify);
+    public Movie modifyMovie(Movie modify) throws Exception;
 
-    public ResponseVo deleteMovie(long id);
+    public ResponseVo deleteMovie(Long id);
 
-    public List<Movie> getMovie(Set<Movie> movieSet);
+    public List<Movie> getMovies() throws Exception;
 }

@@ -40,6 +40,8 @@ public class TheaterRepositoryTests {
         t1.stream().forEach(k-> System.out.println(k.get(k)+":"+k.values()));
         t1.stream().forEach(k-> k.keySet());
 
+
+
     }
 
 

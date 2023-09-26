@@ -19,8 +19,8 @@ public class Movie {
     @Column(name="offdate")
     private Date offdate;
 
-    @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Link> theaterMovieAdateLink;
+//    @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private Set<Link> theaterMovieAdateLink;
     public Movie(){};
     public Movie(Long mid, String mname, Date pubdate, Date offdate) {
         this.mid = mid;
@@ -29,11 +29,11 @@ public class Movie {
         this.offdate = offdate;
     }
 
-    public long getMid() {
+    public Long getMid() {
         return mid;
     }
 
-    public void setMid(long mid) {
+    public void setMid(Long mid) {
         this.mid = mid;
     }
 
