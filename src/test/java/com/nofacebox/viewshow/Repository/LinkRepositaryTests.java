@@ -30,20 +30,20 @@ public class LinkRepositaryTests {
     public void test2() throws Exception {
 //        List<Link> all = linkRepositary.findAll();
 //        all.stream().forEach(k-> System.out.println(k.toString()));
-        List<Map<String, Object>> all = linkRepositary.getAllDatesByTheaterMovie(1, 2);
+        List<Map<String, Object>> all = linkRepositary.getAllDatesByTheaterMovie(1L, 2L);
         all.stream().forEach(k-> System.out.println(k.values()));
 
-        List<Map<String, Object>> allMovies = linkRepositary.getAllMoviesByTheater(5);
+        List<Map<String, Object>> allMovies = linkRepositary.getAllMoviesByTheater(5L);
         allMovies.stream().forEach(k-> System.out.println(k.values()));
 
-        LinkPk lik= linkService.getLink(1);
+        LinkPk lik= linkService.getLink(1L);
         System.out.println(lik.toString());
 //        linkService.save();
 
         Optional<Adate> a1 = adateRepositary.findById(3L);
         Adate a2 = a1.orElseThrow(() -> new Exception("No found"));
-        List<Link> set1 = a2.getTheaterMovieAdateLink();
-        set1.forEach(k-> System.out.println(k.toString()));
+//        List<Link> set1 = a2.getTheaterMovieAdateLink();
+//        set1.forEach(k-> System.out.println(k.toString()));
 //        System.out.println(set1.size());
 //        set1.forEach(k-> System.out.println(k));
 
