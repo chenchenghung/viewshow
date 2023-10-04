@@ -1,5 +1,6 @@
 package com.nofacebox.viewshow.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -25,6 +28,18 @@ public class LinkPk implements Serializable {
     private Long mid;
     @Column(name="aid")
     private Long aid;
+
+    @OneToMany(mappedBy = "linkPk", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Session> sessions= new ArrayList<>();
+
+    @JsonManagedReference
+    public List<Session> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<Session> sessions) {
+        this.sessions = sessions;
+    }
 
     @Override
     public int hashCode() {

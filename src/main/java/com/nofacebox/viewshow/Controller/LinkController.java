@@ -30,17 +30,29 @@ public class LinkController {
     public ResponseEntity<List<AdateDto>> searchDatesByTheaterMovie(@PathVariable Long tid, @PathVariable Long mid){
         return ResponseEntity.ok(linkService.findAllDatesByTheaterMovie(tid,mid));
     }
+//    @PostMapping(value="/link",produces = "application/json")
+//    public ResponseEntity <LinkPk> save (@RequestBody LinkPk saveItem) throws Exception {
+//        Assert.notNull(saveItem,"This entity can not be null");
+//        Assert.isNull(linkService.getLinkId(saveItem),"ready to insert");
+//        return ResponseEntity.ok(linkService.saveLink(saveItem));
+//    }
     @PostMapping(value="/link",produces = "application/json")
-    public ResponseEntity <LinkPk> save (@RequestBody LinkPk saveItem) throws Exception {
+    public ResponseEntity <Link> save (@RequestBody Link saveItem) throws Exception {
         Assert.notNull(saveItem,"This entity can not be null");
         Assert.isNull(linkService.getLinkId(saveItem),"ready to insert");
         return ResponseEntity.ok(linkService.saveLink(saveItem));
     }
 
+//    @PutMapping(value= "/link",produces = "application/json")
+//    public ResponseEntity<LinkPk> upateLinkPk(@RequestBody LinkPk modify) throws Exception {
+//        Assert.notNull(modify,"This entity can not be null");
+//        return ResponseEntity.ok(linkService.modifyLinkPk(modify));
+//    }
     @PutMapping(value= "/link",produces = "application/json")
-    public ResponseEntity<LinkPk> upateLinkPk(@RequestBody LinkPk modify) throws Exception {
+    public ResponseEntity<Link> upateLink(@RequestBody Link modify) throws Exception {
+//        System.out.println(modify.toString());
         Assert.notNull(modify,"This entity can not be null");
-        return ResponseEntity.ok(linkService.modifyLinkPk(modify));
+        return ResponseEntity.ok(linkService.modifyLink(modify));
     }
     @DeleteMapping("/link/{lid}")
     public ResponseEntity<ResponseVo> deleteLink(@PathVariable Long lid){
@@ -59,9 +71,15 @@ public class LinkController {
 
 
 
+//linkpk版本
+//    @PostMapping("/link/findlinkid")
+//    public ResponseEntity<Long> getLinkId(@RequestBody LinkPk item) throws Exception {
+//        return ResponseEntity.ok(linkService.getLinkId(item));
+//    }
 
     @PostMapping("/link/findlinkid")
-    public ResponseEntity<Long> getLinkId(@RequestBody LinkPk item) throws Exception {
+    public ResponseEntity<Long> getLinkId(@RequestBody Link item) throws Exception {
+
         return ResponseEntity.ok(linkService.getLinkId(item));
     }
 
