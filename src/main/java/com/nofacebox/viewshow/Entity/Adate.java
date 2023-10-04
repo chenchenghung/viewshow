@@ -1,8 +1,6 @@
 package com.nofacebox.viewshow.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,6 +8,7 @@ import java.util.*;
 
 @Entity
 @Table(name="adate")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "id")
 public class Adate {
 
     @Id
@@ -19,17 +18,15 @@ public class Adate {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date xdate;
-
     @OneToMany(mappedBy = "adate", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Link> theaterMovieAdateLink= new ArrayList<>();
+    private List<Link> links;
 
-    @JsonManagedReference
-    public List<Link> getTheaterMovieAdateLink() {
-        return theaterMovieAdateLink;
+    public List<Link> getLinks() {
+        return links;
     }
 
-    public void setTheaterMovieAdateLink(List<Link> theaterMovieAdateLink) {
-        this.theaterMovieAdateLink = theaterMovieAdateLink;
+    public void setLinks(List<Link> links) {
+        this.links = links;
     }
 
     public Adate(Long aid, Date xdate) {
@@ -54,5 +51,12 @@ public class Adate {
         this.xdate = xdate;
     }
 
-
+    @Override
+    public String toString() {
+        return "Adate{" +
+                "aid=" + aid +
+                ", xdate=" + xdate +
+                ", links=" + links +
+                '}';
+    }
 }

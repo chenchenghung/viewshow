@@ -1,17 +1,15 @@
 package com.nofacebox.viewshow.Servic;
 
-import com.nofacebox.viewshow.Entity.Link;
-import com.nofacebox.viewshow.Entity.LinkPk;
-import com.nofacebox.viewshow.Entity.Movie;
+import com.nofacebox.viewshow.Entity.*;
 import com.nofacebox.viewshow.Model.AdateDto;
 import com.nofacebox.viewshow.Model.LinkDto;
 import com.nofacebox.viewshow.Model.ResponseVo;
-import com.nofacebox.viewshow.Repository.LinkPkRepositary;
-import com.nofacebox.viewshow.Repository.LinkRepositary;
+import com.nofacebox.viewshow.Repository.*;
 import com.nofacebox.viewshow.Servic.Interface.ILinkService;
 import com.nofacebox.viewshow.Utils.NativeQueryConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +23,12 @@ public class LinkService implements ILinkService {
     LinkRepositary linkRepositary;
     @Autowired
     LinkPkRepositary linkPkRepositary;
+    @Autowired
+    AdateRepositary adateRepositary;
+    @Autowired
+    MovieRepositary movieRepositary;
+    @Autowired
+    TheaterRepositary theaterRepositary;
 
     //待確認實際功能
     @Override
@@ -91,6 +95,47 @@ public class LinkService implements ILinkService {
         List<Map<String, Object>> dtos = linkRepositary.getLinkDTOByTheater(tid);
         List<LinkDto> data = NativeQueryConverter.convert(dtos, LinkDto.class);
         return data;
+
+    }
+
+    @Override
+    public Link saveLink(Link saveItem) throws Exception {
+        if(this.getLinkId(saveItem)==null){
+            Theater t = theaterRepositary.findById(saveItem.getTheater().getTid()).orElseThrow(()->new Exception("not found"));
+            Adate a = adateRepositary.findById(saveItem.getAdate().getAid()).orElseThrow(()->new Exception("not found"));
+            Movie m = movieRepositary.findById(saveItem.getMovie().getMid()).orElseThrow(()->new Exception("not found"));
+            saveItem.setTheater(t);
+            saveItem.setAdate(a);
+            saveItem.setMovie(m);
+            return linkRepositary.save(saveItem);
+        }else {return  null;}    }
+
+    @Override
+    public Link modifyLink(Link modify) throws Exception {
+        Link l = linkRepositary.findById(modify.getLinkid()).orElseThrow(() -> new Exception("not found linkid"));
+        l.setAdate(adateRepositary.findById(Long.valueOf(modify.getAdate().getAid())).orElseThrow(() -> new Exception("not found aid")));
+        l.setTheater(theaterRepositary.findById(modify.getTheater().getTid()).orElseThrow(() -> new Exception("not found tid")));
+        l.setMovie(movieRepositary.findById(modify.getMovie().getMid()).orElseThrow(() -> new Exception("not found mid")));
+
+        return linkRepositary.save(l);
+    }
+
+    @Override
+    public Long getLinkId(Link link) throws Exception {
+        Theater t = theaterRepositary.findById(link.getTheater().getTid()).orElseThrow(()->new Exception("not found"));
+        Adate a = adateRepositary.findById(link.getAdate().getAid()).orElseThrow(()->new Exception("not found"));
+        Movie m = movieRepositary.findById(link.getMovie().getMid()).orElseThrow(()->new Exception("not found"));
+        link.setAdate(a);
+        link.setTheater(t);
+        link.setMovie(m);
+        Example<Link> example = Example.of(link);
+        Optional<Link> ex = linkRepositary.findOne(example);
+//        Link data = ex.orElseThrow(() -> new Exception("no data"));
+        if(ex.isPresent()){
+            return ex.get().getLinkid() ;
+        }else{
+            return null;
+        }
 
     }
 }

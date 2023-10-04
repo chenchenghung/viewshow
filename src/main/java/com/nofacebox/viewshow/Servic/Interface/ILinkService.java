@@ -18,11 +18,17 @@ public interface ILinkService {
 
     public LinkPk saveLink(LinkPk saveItem) throws Exception;
 
+    public Link saveLink(Link saveItem) throws Exception;
+
     public LinkPk modifyLinkPk(LinkPk modify) throws Exception;
+
+    public Link modifyLink(Link modify) throws Exception;
 
     public ResponseVo deleteLink(long id);
 
     public Long getLinkId(LinkPk pk) throws Exception;
+
+    public Long getLinkId(Link pk) throws Exception;
 
     public List<AdateDto> findAllDatesByTheaterMovie(Long tid, Long mid);
 

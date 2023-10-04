@@ -3,6 +3,7 @@ package com.nofacebox.viewshow.Entity;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,22 +11,23 @@ import java.util.Objects;
 @Entity
 @Table(name="link")
 @Getter
+@Setter
 public class Link implements Serializable {
     //暫時不用，再問問看
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long linkid;
 
-    @JsonBackReference
+//    @JsonBackReference(value ="theater")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "tid")
     private Theater theater;
 
-    @JsonBackReference
+//    @JsonBackReference(value = "movie")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "mid")
     private Movie movie;
-    @JsonBackReference
+//    @JsonBackReference(value = "adate")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "aid")
     private Adate adate;

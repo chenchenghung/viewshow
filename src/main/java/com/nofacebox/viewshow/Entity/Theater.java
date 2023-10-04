@@ -1,11 +1,17 @@
 package com.nofacebox.viewshow.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name="theater")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "id")
 public class Theater {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +22,7 @@ public class Theater {
     private  String name;
 
     @OneToMany(mappedBy = "theater", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Link> theaterMovieAdateLink;
+    private List<Link> links;
     public  Theater(){};
 
     public Theater (long tid , String region, String name){
@@ -52,5 +58,13 @@ public class Theater {
     @Override
     public String toString() {
         return "Movie : [ id= " + tid + ", region =" + region + ", name = "+name;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
     }
 }

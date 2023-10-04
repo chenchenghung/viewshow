@@ -1,12 +1,18 @@
 package com.nofacebox.viewshow.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name="movie")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "id")
 public class Movie {
 
     @Id
@@ -18,9 +24,8 @@ public class Movie {
     private Date pubdate;
     @Column(name="offdate")
     private Date offdate;
-
     @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Link> theaterMovieAdateLink;
+    private List<Link> links;
     public Movie(){};
     public Movie(Long mid, String mname, Date pubdate, Date offdate) {
         this.mid = mid;
@@ -59,5 +64,13 @@ public class Movie {
 
     public void setOffdate(Date offdate) {
         this.offdate = offdate;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
     }
 }
