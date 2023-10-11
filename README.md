@@ -1,5 +1,5 @@
 # viewshow
-華納威秀影城<br></br>
+VIEWSHOW CINEMA - 華納威秀影城<br></br>
 URL : https://www.vscinemas.com.tw/vsweb/
 
 <img width="688" alt="Screen Shot 2023-10-11 at 6 23 59 PM" src="https://github.com/chenchenghung/viewshow/assets/29514988/3f2f76f1-372b-4d50-ade2-906069333db5">
@@ -25,7 +25,7 @@ Theater, Movie and Datetime , he could be able to select Sessions and seats for 
 ## Environment / Technical Languages
 Mainly focus on produce restful APIs for website to reach continuous and instant searches from Cinema, Movie, Datetime to Sessions 
 ### Frontend
-* Html, Css, JavaScript
+* HTML, CSS, JavaScript
 ### Backhend
 * Java EE - Spring Boot
 ### Docker
