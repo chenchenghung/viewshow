@@ -15,13 +15,13 @@ import java.util.Map;
 public interface LinkRepositary extends JpaRepository<Link,Long> {
 //    Link findById(LinkPk id);
     @Query(nativeQuery = true,
-    value = "select m.mid,m.mname from link l " +
+    value = "select m.mid as xvalue,m.mname as xtext from link l " +
             "join theater t on l.tid=t.tid " +
             "join movie m on l.mid=m.mid " +
             "where l.tid=?1 and cast(now() as date) >= pubdate and cast(now() as date)<=offdate")
     List<Map<String,Object>> getAllMoviesByTheater(@Param("tid")Long tid );
     @Query(nativeQuery = true,
-    value = "select a.aid,a.xdate from link l " +
+    value = "select a.aid as xvalue,a.xdate as xtext from link l " +
             "join theater t on l.tid=t.tid " +
             "join movie m on l.mid=m.mid " +
             "join adate a on l.aid=a.aid " +

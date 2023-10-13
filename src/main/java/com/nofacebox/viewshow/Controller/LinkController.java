@@ -6,28 +6,31 @@ import com.nofacebox.viewshow.Entity.Movie;
 import com.nofacebox.viewshow.Model.AdateDto;
 import com.nofacebox.viewshow.Model.LinkDto;
 import com.nofacebox.viewshow.Model.ResponseVo;
+import com.nofacebox.viewshow.Model.ResultDto;
 import com.nofacebox.viewshow.Servic.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.transform.Result;
 import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin
 public class LinkController {
     @Autowired
     LinkService linkService;
 
 
-    @GetMapping("/link/theater/{tid}")
-    public ResponseEntity<List<Movie>> searchMoviesByTheater(@PathVariable Long tid){
+    @GetMapping("/link/GetLstDicMovie")
+    public ResponseEntity<List<ResultDto>> searchMoviesByTheater(@RequestParam(name="theater") Long tid){
         return ResponseEntity.ok(linkService.findAllMoviesByTheater(tid));
     }
-    @GetMapping("/link/theater/{tid}/movie/{mid}")
-    public ResponseEntity<List<AdateDto>> searchDatesByTheaterMovie(@PathVariable Long tid, @PathVariable Long mid){
+    @GetMapping("/link/GetLstDicDate")
+    public ResponseEntity<List<ResultDto>> searchDatesByTheaterMovie(@RequestParam(name="theater") Long tid, @RequestParam(name="movie") Long mid){
         return ResponseEntity.ok(linkService.findAllDatesByTheaterMovie(tid,mid));
     }
 //    @PostMapping(value="/link",produces = "application/json")

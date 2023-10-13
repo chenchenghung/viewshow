@@ -17,7 +17,7 @@ public interface ISessionService {
 
     public ResponseVo deleteSession(Long id);
 
-    public List<SessionDto> findSessionsByLinkid(Long linkid) throws Exception;
+    public List<SessionDto> findSessionsByLinkid(Long tid, Long mid, Long aid) throws Exception;
 
 //    public ResponseVo modifySessionSeat(String seat,String userid,Long sid);
 }

@@ -60,8 +60,8 @@ public class SessionService implements ISessionService {
     }
 
     @Override
-    public List<SessionDto> findSessionsByLinkid(Long linkid) throws Exception {
-        List<Map<String, Object>> ss = sessionRepositary.getSessionDTOByLinkind(linkid);
+    public List<SessionDto> findSessionsByLinkid(Long tid, Long mid, Long aid) throws Exception {
+        List<Map<String, Object>> ss = sessionRepositary.getSessionDTOByLinkind(tid, mid, aid);
         List<SessionDto> ret = NativeQueryConverter.convert(ss, SessionDto.class);
         return ret;
     }

@@ -6,6 +6,7 @@ import com.nofacebox.viewshow.Entity.Movie;
 import com.nofacebox.viewshow.Model.AdateDto;
 import com.nofacebox.viewshow.Model.LinkDto;
 import com.nofacebox.viewshow.Model.ResponseVo;
+import com.nofacebox.viewshow.Model.ResultDto;
 
 import java.util.Date;
 import java.util.List;
@@ -30,9 +31,9 @@ public interface ILinkService {
 
     public Long getLinkId(Link pk) throws Exception;
 
-    public List<AdateDto> findAllDatesByTheaterMovie(Long tid, Long mid);
+    public List<ResultDto> findAllDatesByTheaterMovie(Long tid, Long mid);
 
-    public List<Movie> findAllMoviesByTheater(Long tid);
+    public List<ResultDto> findAllMoviesByTheater(Long tid);
 
     public List<LinkDto> findLinkDTOByTheater(Long tid);
 }
