@@ -2,6 +2,7 @@ package com.nofacebox.viewshow.Controller;
 
 import com.nofacebox.viewshow.Entity.Theater;
 import com.nofacebox.viewshow.Model.ResponseVo;
+import com.nofacebox.viewshow.Model.ResultDto;
 import com.nofacebox.viewshow.Servic.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin
 public class TheaterController {
     @Autowired
     TheaterService theaterService;
@@ -24,6 +26,12 @@ public class TheaterController {
     public ResponseEntity<List<Theater>> getAllTheaters(){
         return ResponseEntity.ok(theaterService.getAllTheaters());
     }
+
+    @GetMapping("/link/GetLstDicTheater")
+    public ResponseEntity<List<ResultDto>> getAllTheatersResult() throws Exception {
+        return ResponseEntity.ok(theaterService.getAllTheatersToResult());
+    }
+
 
     @PostMapping( value="/theater",produces = "application/json")
     public ResponseEntity<Theater> save(@RequestBody Theater saveItem){

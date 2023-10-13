@@ -14,11 +14,13 @@ import java.util.Map;
 public interface SessionRepositary extends JpaRepository<Session, Long> {
 
     @Query(nativeQuery = true,
-            value = "select s.sid, s.linkid, s.avadate, s.avasession, s.hall from sessions s " +
-//                    "join link l on s.linkid=l.linkid " +
-//                    "join adate a on l.aid=a.aid " +
-                    "where s.linkid=?1 ")
-    List<Map<String,Object>> getSessionDTOByLinkind( @Param("linkid") Long linkid);
+            value = "select s.sid, s.linkid, s.avadate, s.avasession, s.hall, s.sid as xvalue, s.avasession as xtext from sessions s " +
+                    "join link l on s.linkid=l.linkid " +
+                    "join theater t on l.tid=t.tid " +
+                    "join movie m on l.mid=m.mid " +
+                    "join adate a on l.aid=a.aid " +
+                    "where t.tid=?1 and m.mid=?2 and a.aid=?3 ")
+    List<Map<String,Object>> getSessionDTOByLinkind( @Param("tid") Long tid,@Param("mid") Long mid,@Param("aid") Long aid);
 
 //    static final String seat=":seat";
 //    @Modifying

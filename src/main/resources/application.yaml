@@ -9,6 +9,21 @@ spring:
                 ddl-auto : update
                 jdbc.lob.non_contextual_creation : true
                 dialect : org.hibernate.dialect.PostgreSQLDialect
+    mvc:
+        view:
+            prefix: classpath:/templates/
+            suffix: .html
+        static-path-pattern : /webapp/**
+    resources:
+        static-locations : ["classpath:/webapp/"]
+
+    thymeleaf:
+        cache: false
+        mode:  LEGACYHTML5
+        prefix: classpath:/templates/
+        suffix: .html
+        content-type: html/text
+        encoding : UTF-8
 
 
 

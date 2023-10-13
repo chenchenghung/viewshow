@@ -4,6 +4,7 @@ import com.nofacebox.viewshow.Entity.*;
 import com.nofacebox.viewshow.Model.AdateDto;
 import com.nofacebox.viewshow.Model.LinkDto;
 import com.nofacebox.viewshow.Model.ResponseVo;
+import com.nofacebox.viewshow.Model.ResultDto;
 import com.nofacebox.viewshow.Repository.*;
 import com.nofacebox.viewshow.Servic.Interface.ILinkService;
 import com.nofacebox.viewshow.Utils.NativeQueryConverter;
@@ -76,17 +77,18 @@ public class LinkService implements ILinkService {
     }
 
     @Override
-    public List<AdateDto> findAllDatesByTheaterMovie(Long tid, Long mid) {
+    public List<ResultDto> findAllDatesByTheaterMovie(Long tid, Long mid) {
         List<Map<String, Object>> allDates = linkRepositary.getAllDatesByTheaterMovie(tid, mid);
-        List<AdateDto> data = NativeQueryConverter.convert(allDates, AdateDto.class);
+
+        List<ResultDto> data = NativeQueryConverter.convert(allDates, ResultDto.class);
 
         return data;
     }
 
     @Override
-    public List<Movie> findAllMoviesByTheater(Long tid) {
+    public List<ResultDto> findAllMoviesByTheater(Long tid) {
         List<Map<String, Object>> allMovies = linkRepositary.getAllMoviesByTheater(tid);
-        List<Movie> data = NativeQueryConverter.convert(allMovies, Movie.class);
+        List<ResultDto> data = NativeQueryConverter.convert(allMovies, ResultDto.class);
         return data;
     }
 

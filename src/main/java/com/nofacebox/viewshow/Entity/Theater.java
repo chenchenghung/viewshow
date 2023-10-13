@@ -1,9 +1,6 @@
 package com.nofacebox.viewshow.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,7 +17,7 @@ public class Theater {
     private String region;
     @Column (name="name")
     private  String name;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "theater", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Link> links;
     public  Theater(){};

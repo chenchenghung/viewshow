@@ -17,4 +17,9 @@ public interface TheaterRepositary extends JpaRepository<Theater,Long> {
             value = "select * from theater t where t.region=?1")
     public Optional<List<Map<String,String>>> getTheaterByRegion(@Param("region") String region) ;
 
+    @Query(nativeQuery = true,
+            value = "select t.tid as xvalue, t.name as xtext from theater t ")
+    public Optional<List<Map<String,Object>>> getAllTheatersToResult() ;
+
+
 }

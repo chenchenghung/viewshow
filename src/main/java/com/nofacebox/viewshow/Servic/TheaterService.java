@@ -2,8 +2,10 @@ package com.nofacebox.viewshow.Servic;
 
 import com.nofacebox.viewshow.Entity.Theater;
 import com.nofacebox.viewshow.Model.ResponseVo;
+import com.nofacebox.viewshow.Model.ResultDto;
 import com.nofacebox.viewshow.Repository.TheaterRepositary;
 import com.nofacebox.viewshow.Servic.Interface.ITheaterService;
+import com.nofacebox.viewshow.Utils.NativeQueryConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -52,5 +54,12 @@ public class TheaterService implements ITheaterService {
     @Override
     public List<Theater> getAllTheaters() {
         return theaterRepositary.findAll();
+    }
+
+    @Override
+    public List<ResultDto> getAllTheatersToResult() throws Exception {
+        List<Map<String, Object>> ss = theaterRepositary.getAllTheatersToResult().orElseThrow(() -> new Exception("not found"));
+        List<ResultDto> ret = NativeQueryConverter.convert(ss, ResultDto.class);
+        return ret;
     }
 }

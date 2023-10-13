@@ -18,6 +18,7 @@ public class Adate {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date xdate;
+    @JsonIgnore
     @OneToMany(mappedBy = "adate", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Link> links;
 

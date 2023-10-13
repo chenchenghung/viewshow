@@ -1,9 +1,6 @@
 package com.nofacebox.viewshow.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -25,6 +22,7 @@ public class Movie {
     @Column(name="offdate")
     private Date offdate;
     @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
     private List<Link> links;
     public Movie(){};
     public Movie(Long mid, String mname, Date pubdate, Date offdate) {

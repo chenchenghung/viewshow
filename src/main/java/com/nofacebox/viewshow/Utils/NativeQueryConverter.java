@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ public class NativeQueryConverter {
     }
 
     public static <T> List<T> convert(List<Map<String, Object>> dataList, Class<T> objClass) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        objectMapper.setDateFormat(sdf);
         List<T> res = new ArrayList<>();
         for (Map<String, Object> item: dataList) {
             try {

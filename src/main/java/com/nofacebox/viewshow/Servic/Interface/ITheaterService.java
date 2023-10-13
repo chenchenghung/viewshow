@@ -2,6 +2,7 @@ package com.nofacebox.viewshow.Servic.Interface;
 
 import com.nofacebox.viewshow.Entity.Theater;
 import com.nofacebox.viewshow.Model.ResponseVo;
+import com.nofacebox.viewshow.Model.ResultDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -21,4 +22,6 @@ public interface ITheaterService {
 
 //    public List<Map<String, Object>>getTheaterByRegion(String region);
     public List<Theater> getAllTheaters();
+
+    public List<ResultDto> getAllTheatersToResult() throws Exception;
 }

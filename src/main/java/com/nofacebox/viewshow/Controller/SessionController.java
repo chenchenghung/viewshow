@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin
 public class SessionController {
 
     @Autowired
@@ -29,9 +30,9 @@ public class SessionController {
         return ResponseEntity.ok(sessionService.getSession(sid));
     }
 
-    @GetMapping("/session/{linkid}")
-    public ResponseEntity<List<SessionDto>> searchSessionsByLinkid(@PathVariable Long linkid) throws Exception {
-        return ResponseEntity.ok(sessionService.findSessionsByLinkid(linkid));
+    @GetMapping("/session/GetLstDicSession")
+    public ResponseEntity<List<SessionDto>> searchSessionsByLinkid(@RequestParam(name="cinema") Long tid,@RequestParam(name="movie") Long mid, @RequestParam(name="date") Long aid ) throws Exception {
+        return ResponseEntity.ok(sessionService.findSessionsByLinkid(tid,mid,aid));
     }
 
     @PostMapping(value="/session",produces = "application/json")
